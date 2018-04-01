@@ -22,7 +22,7 @@ namespace EmployeeMVCCore.Migrations
 
             modelBuilder.Entity("EmployeeMVCCore.Models.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")

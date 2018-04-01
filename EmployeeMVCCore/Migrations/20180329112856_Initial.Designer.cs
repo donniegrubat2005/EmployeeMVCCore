@@ -11,8 +11,8 @@ using System;
 namespace EmployeeMVCCore.Migrations
 {
     [DbContext(typeof(AppdbContext))]
-    [Migration("20180228102018_update employees")]
-    partial class updateemployees
+    [Migration("20180329112856_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace EmployeeMVCCore.Migrations
 
             modelBuilder.Entity("EmployeeMVCCore.Models.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")

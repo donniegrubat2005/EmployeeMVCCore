@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EmployeeMVCCore.ViewModel.EmployeeIndexModel>
+
+@{
+    ViewData["Title"] = "List of Employees";
+}
+
+<div id="home-content" class="panel-default" style="margin-top: 15px;">
+    <div class="panel-heading">List of Employees</div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>
+                            @employee.FirstName
+                        </td>
+                        <td>
+                            @employee.LastName
+                        </td>
+                        <td>
+                            @employee.Address
+                        </td>
+                        <td>
+                            <a asp-action="Edit" class="btn btn-default" asp-route-id="@employee.Id">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ?');">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="panel-footer">
+        <p>
+          <a asp-action="Create" class="btn btn-default">Create New</a>
+        </p>
+    </div>
+    
+</div>
+
+
+
+

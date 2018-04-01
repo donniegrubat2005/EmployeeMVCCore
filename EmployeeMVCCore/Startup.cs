@@ -30,8 +30,9 @@ namespace EmployeeMVCCore
 
             services.AddDbContext<AppdbContext>(options
              => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
-
-            services.AddTransient<IEmployeeRepository,EmployeeRepository>();
+            services.AddSingleton(Configuration);
+            services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+            
         }
 
        

@@ -10,9 +10,9 @@ namespace EmployeeMVCCore.Interfaces
     {
         IEnumerable<Employee> GetallEmployee();
         void Create(Employee emp);
-        void Edit(Employee emp);
-        void Delete(int id);
-        Employee FindById(int id);
+        void Update(Employee emp);
+        void Delete(Guid id);
+        Employee FindById(Guid id);
 
     }
 }

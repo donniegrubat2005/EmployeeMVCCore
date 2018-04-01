@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using EmployeeMVCCore.Config;
 using EmployeeMVCCore.ImplRepository;
 using EmployeeMVCCore.Interfaces;
+using EmployeeMVCCore.ViewModel;
 
 namespace EmployeeMVCCore.Controllers
 {
@@ -18,13 +19,79 @@ namespace EmployeeMVCCore.Controllers
         public HomeController(IEmployeeRepository context)
         {
 
-            this._dbcontext = context;
+            _dbcontext = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
-            return View(_dbcontext.GetallEmployee());
+
+            //return View(_dbcontext.GetallEmployee());
+            var empModels =
+                (from emp in _dbcontext.GetallEmployee()
+                     //where emp.Id == new Guid(id)
+                 //where emp.FirstName.StartsWith("Donnie") || emp.FirstName == null
+                 select emp
+                //).AsQueryable();
+                ).ToList();
+
+
+            var empList = empModels
+                .Select(res => new EmployeeIndexModel
+                {
+                    Id = res.Id
+                    ,
+                    FirstName = res.FirstName
+                    ,
+                    LastName = res.LastName
+                    ,
+                    Address = res.Address
+                    
+                }
+                );
+
+            //var empModel = new EmployeeIndexModel()
+            //{
+            //    Employee = empList
+            //};
+
+            return View(empList);
+
         }
+
+        //public IActionResult GetActionResult()
+        //{
+        //    //return View(_dbcontext.GetallEmployee());
+        //    var empModels =
+        //        (from emp in _dbcontext.GetallEmployee()
+        //             //where emp.Id == new Guid(id)
+        //             where emp.FirstName.StartsWith("Donnie") || emp.FirstName == null
+        //         select emp
+        //        //).AsQueryable();
+        //        ).ToList();
+
+
+        //    var empList = empModels
+        //        .Select(res => new EmployeeIndexModel
+        //        {
+        //            Id = res.Id
+        //            ,
+        //            FirstName = res.FirstName
+        //            ,
+        //            LastName = res.LastName
+        //            ,
+        //            Address = res.Address
+
+        //        }
+        //        );
+
+        //    //var empModel = new EmployeeIndexModel()
+        //    //{
+        //    //    Employee = empList
+        //    //};
+
+        //    return View(empList);
+
+        //}
 
         public IActionResult Create()
         {
@@ -32,35 +99,61 @@ namespace EmployeeMVCCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee emp)
+        public IActionResult Create(EmployeeCreateModel empModel)
         {
-            if (!ModelState.IsValid) return View(emp);
+            //if (!ModelState.IsValid) return View(emp);
+            //_dbcontext.Create(emp);
+            //return RedirectToAction("Index");
+            var emp = new Employee()
+            {
+                FirstName = empModel.FirstName
+                ,
+                LastName = empModel.LastName
+                ,
+                Address = empModel.Address
+            };
             _dbcontext.Create(emp);
             return RedirectToAction("Index");
 
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
-            Employee emp = _dbcontext.FindById(id);
+            //Employee emp = _dbcontext.FindById(id);
+            //return View(emp);
+            var emp = _dbcontext.FindById(id);
             return View(emp);
         }
 
         [HttpPost]
-        public IActionResult Edit(Employee emp)
+        public IActionResult Edit(EmployeeCreateModel empModel)
         {
-            if (!ModelState.IsValid) return View(emp);
-            _dbcontext.Edit(emp);
-            return RedirectToAction("Index");
+            //if (!ModelState.IsValid) return View(emp);
+            //_dbcontext.Edit(emp);
+            //return RedirectToAction("Index");
+            var emp = new Employee()
+            {
+                Id = empModel.Id
+                ,
+                FirstName = empModel.FirstName
+                ,
+                LastName = empModel.LastName
+                ,
+                Address = empModel.Address
 
+            };
+            _dbcontext.Update(emp);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
+            //_dbcontext.Delete(id);
+            //return RedirectToAction("Index");
+            var emp = _dbcontext.FindById(id);
             _dbcontext.Delete(id);
+
             return RedirectToAction("Index");
         }
-
-
     }
 }

@@ -1,58 +1,32 @@
-﻿@using EmployeeMVCCore.Models
-@model IEnumerable<Employee>
-
+﻿@model IEnumerable<EmployeeMVCCore.ViewModel.EmployeeIndexModel>
 @{
     ViewData["Title"] = "List of Employees";
 }
 
-<div class="panel-default" style="margin-top: 15px;">
-    <div class="panel-heading">List of Employees</div>
-    <div class="panel-body">
-        <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.Id">
-                                <i class="glyphicon glyphicon-pencil"></i>  Edit
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ?');">
-                                <i class="glyphicon glyphicon-trash"></i>  Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="panel-footer">
-        <p>
-            <a asp-action="Create" class="btn btn-default">Create New</a>
-        </p>
+<div id="newHome" class="newHome">
+    <h4>@Html.ActionLink("add new employee", "Create", "Home", null, new { style = "color: #333;", data_target = "#exampleModal", data_toggle = "modal" })</h4>
+    <a href="" class="reset-field">
+        <i class="fa fa-refresh status-block" aria-hidden="true"></i>
+    </a>
+    <a href="#" class="reset-field" id="btnSearch" style="margin-right: 10px">
+        <i class="fa fa-search status-block" aria-hidden="true"></i>
+    </a>
+    <div class="contentSide standard-list clearfix">
+
+        @foreach (var item in Model)
+    {
+          @*<a asp-action="Index" class="btn btn-default" asp-route-id="@item.Id">*@
+        <div class="list-item" data-id="@Html.DisplayFor(modelItem => item.Id)">
+            <div class="title">@Html.DisplayFor(modelItem => item.FirstName)</div>
+            <div class="info w100">@Html.DisplayFor(modelItem => item.LastName)</div>
+            <div class="description w100 truncate">@Html.Raw(item.Address)</div>
+            <input type="hidden" id="id" value="@Html.Raw(item.Id)" />
+            <a asp-action="Index" class="btn btn-default" asp-route-id="@item.Id">
+                @Html.Raw(item.FirstName)
+            </a>
+
+        </div>
+            }
+
     </div>
 </div>
-

@@ -1,6 +1,7 @@
 ﻿using EmployeeMVCCore.Config;
 using EmployeeMVCCore.Interfaces;
 using EmployeeMVCCore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,13 @@ namespace EmployeeMVCCore.ImplRepository
 
         public void Create(Employee emp)
         {
+
+           
             _context.Employees.Add(emp);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             Employee emp = _context.Employees.Find(id);
 
@@ -31,13 +34,13 @@ namespace EmployeeMVCCore.ImplRepository
             _context.SaveChanges();
         }
 
-         public void Edit(Employee emp)
+         public void Update(Employee emp)
         {
             _context.Employees.Update(emp);
             _context.SaveChanges();
         }
 
-        public Employee FindById(int id)
+        public Employee FindById(Guid id)
         {
             var find = _context.Employees.Where(x => x.Id == id).SingleOrDefault();
             return find;
@@ -47,7 +50,8 @@ namespace EmployeeMVCCore.ImplRepository
         {
             return _context.Employees;
         }
-    }
+
+      }
 
 
 }
