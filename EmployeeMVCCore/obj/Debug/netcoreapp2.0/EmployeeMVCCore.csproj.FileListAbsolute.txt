@@ -14,9 +14,9 @@ C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\bin\Debug\ne
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\bin\Debug\netcoreapp2.0\EmployeeMVCCore.runtimeconfig.dev.json
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\bin\Debug\netcoreapp2.0\EmployeeMVCCore.dll
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\bin\Debug\netcoreapp2.0\EmployeeMVCCore.pdb
-C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.csprojResolveAssemblyReference.cache
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.csproj.CoreCompileInputs.cache
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.AssemblyInfoInputs.cache
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.AssemblyInfo.cs
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.dll
 C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.pdb
+C:\Development\Microsoft\C#\NetCore\EmployeeMVCCore\EmployeeMVCCore\obj\Debug\netcoreapp2.0\EmployeeMVCCore.csprojResolveAssemblyReference.cache

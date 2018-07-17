@@ -1,32 +1,77 @@
-﻿@model IEnumerable<EmployeeMVCCore.ViewModel.EmployeeIndexModel>
+﻿@*@model IEnumerable<EmployeeMVCCore.ViewModel.EmployeeIndexModel>*@
+@model ReflectionIT.Mvc.Paging.PagingList<EmployeeMVCCore.ViewModel.EmployeeIndexModel>
+@using ReflectionIT.Mvc.Paging
+
 @{
     ViewData["Title"] = "List of Employees";
 }
 
-<div id="newHome" class="newHome">
-    <h4>@Html.ActionLink("add new employee", "Create", "Home", null, new { style = "color: #333;", data_target = "#exampleModal", data_toggle = "modal" })</h4>
-    <a href="" class="reset-field">
-        <i class="fa fa-refresh status-block" aria-hidden="true"></i>
-    </a>
-    <a href="#" class="reset-field" id="btnSearch" style="margin-right: 10px">
-        <i class="fa fa-search status-block" aria-hidden="true"></i>
-    </a>
-    <div class="contentSide standard-list clearfix">
+<div id="home-content" class="panel-default" style="margin-top: 15px;">
+    <div class="panel-heading">List of Employees</div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
 
-        @foreach (var item in Model)
-    {
-          @*<a asp-action="Index" class="btn btn-default" asp-route-id="@item.Id">*@
-        <div class="list-item" data-id="@Html.DisplayFor(modelItem => item.Id)">
-            <div class="title">@Html.DisplayFor(modelItem => item.FirstName)</div>
-            <div class="info w100">@Html.DisplayFor(modelItem => item.LastName)</div>
-            <div class="description w100 truncate">@Html.Raw(item.Address)</div>
-            <input type="hidden" id="id" value="@Html.Raw(item.Id)" />
-            <a asp-action="Index" class="btn btn-default" asp-route-id="@item.Id">
-                @Html.Raw(item.FirstName)
-            </a>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>
+                            @employee.FirstName
+                        </td>
+                        <td>
+                            @employee.LastName
+                        </td>
+                        <td>
+                            @employee.Address
+                        </td>
+                        <td>
+                            <a asp-action="Edit" class="btn btn-default" asp-route-id="@employee.Id">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ?');">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
+    <div class="panel-footer">
+        <p>
+            <a asp-action="Create" class="btn btn-default" data-toggle="modal" data-target="#modal-container">Create New</a>
+            @*<a asp-action="Create" class="btn btn-default">Create New</a>*@
+
+        </p>
+        <nav aria-label="Suppliers navigation example">
+            @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model, })
+        </nav>
+    </div>
+   
+</div>
+
+<!-- MODAL-->
+<div id="modal-container" class="modal left fade hidden-print" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Partial Modal-->
         </div>
-            }
-
     </div>
 </div>
+
+
+

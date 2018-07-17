@@ -9,6 +9,7 @@ using EmployeeMVCCore.Config;
 using EmployeeMVCCore.ImplRepository;
 using EmployeeMVCCore.Interfaces;
 using EmployeeMVCCore.ViewModel;
+using ReflectionIT.Mvc.Paging;
 
 namespace EmployeeMVCCore.Controllers
 {
@@ -22,18 +23,19 @@ namespace EmployeeMVCCore.Controllers
             _dbcontext = context;
         }
 
-        public IActionResult Index(string id)
+        public IActionResult Index(int page=1)
         {
 
             //return View(_dbcontext.GetallEmployee());
-            var empModels =
-                (from emp in _dbcontext.GetallEmployee()
-                     //where emp.Id == new Guid(id)
-                 //where emp.FirstName.StartsWith("Donnie") || emp.FirstName == null
-                 select emp
-                //).AsQueryable();
-                ).ToList();
+            //var empModels =
+            //    (from emp in _dbcontext.GetallEmployee()
+            //         //where emp.Id == new Guid(id)
+            //         //where emp.FirstName.StartsWith("Donnie") || emp.FirstName == null
+            //     select emp
+            //    //).AsQueryable();
+            //    ).ToList();
 
+            var empModels = _dbcontext.GetallEmployee().OrderBy(e => e.LastName);
 
             var empList = empModels
                 .Select(res => new EmployeeIndexModel
@@ -45,16 +47,17 @@ namespace EmployeeMVCCore.Controllers
                     LastName = res.LastName
                     ,
                     Address = res.Address
-                    
+
                 }
                 );
+            var emp = PagingList.Create(empList, 5, page);
 
             //var empModel = new EmployeeIndexModel()
             //{
             //    Employee = empList
             //};
 
-            return View(empList);
+            return View(emp);
 
         }
 
@@ -95,7 +98,8 @@ namespace EmployeeMVCCore.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return PartialView("_Create");
+            //return View();
         }
 
         [HttpPost]
@@ -104,6 +108,7 @@ namespace EmployeeMVCCore.Controllers
             //if (!ModelState.IsValid) return View(emp);
             //_dbcontext.Create(emp);
             //return RedirectToAction("Index");
+            if (ModelState.IsValid) { 
             var emp = new Employee()
             {
                 FirstName = empModel.FirstName
@@ -113,8 +118,9 @@ namespace EmployeeMVCCore.Controllers
                 Address = empModel.Address
             };
             _dbcontext.Create(emp);
+            
+            }
             return RedirectToAction("Index");
-
         }
 
         public IActionResult Edit(Guid id)

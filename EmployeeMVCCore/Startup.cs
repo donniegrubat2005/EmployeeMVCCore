@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReflectionIT.Mvc.Paging;
 
 namespace EmployeeMVCCore
 {
@@ -32,7 +33,7 @@ namespace EmployeeMVCCore
              => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             services.AddSingleton(Configuration);
             services.AddScoped<IEmployeeRepository,EmployeeRepository>();
-            
+            services.AddPaging();
         }
 
        

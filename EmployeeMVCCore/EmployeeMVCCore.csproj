@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\resources\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Home\Create.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Home\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
  
 
